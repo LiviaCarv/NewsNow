@@ -22,7 +22,7 @@ fun PageIndicator(
     modifier: Modifier = Modifier
 ) {
     val selectedColor = MaterialTheme.colorScheme.primary
-    val unselectedColor = MaterialTheme.colorScheme.onBackground
+    val unselectedColor = MaterialTheme.colorScheme.outline
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(3.dp)

@@ -15,13 +15,14 @@ import com.project.newsnow.ui.theme.NewsNowTheme
 @Composable
 fun NewsButton(
     text: String,
+    showBackgroundColor: Boolean = true,
     onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            containerColor = if (showBackgroundColor) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.background,
+            contentColor = MaterialTheme.colorScheme.onBackground
         ),
         shape = RoundedCornerShape(size = 6.dp)
     ) {
@@ -41,6 +42,7 @@ private fun NewsButtonPreview() {
     NewsNowTheme() {
         NewsButton(
             "Next",
+            false,
             {}
         )
     }
