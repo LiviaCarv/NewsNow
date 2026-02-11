@@ -3,7 +3,6 @@ package com.project.newsnow.presentation.onboarding.components
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,12 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.project.newsnow.presentation.Dimens.MediumPadding1
 import com.project.newsnow.presentation.Dimens.MediumPadding2
 import com.project.newsnow.presentation.onboarding.Page
-import com.project.newsnow.presentation.onboarding.pages
 import com.project.newsnow.ui.theme.NewsNowTheme
 
 @Composable
@@ -43,7 +42,7 @@ fun OnBoardingPage(
         )
         Text(
             modifier = Modifier.padding(horizontal = MediumPadding1),
-            text = page.title,
+            text = stringResource(id = page.title),
             style = MaterialTheme.typography.titleLarge.copy(
                 fontWeight = FontWeight.Bold,
             ),
@@ -51,7 +50,7 @@ fun OnBoardingPage(
         )
         Text(
             modifier = Modifier.padding(horizontal = MediumPadding1),
-            text = page.description,
+            text = stringResource(id = page.description),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.secondary
         )
@@ -64,7 +63,7 @@ fun OnBoardingPage(
 @Composable
 private fun OnBoardingPagePreviewNight() {
     NewsNowTheme() {
-        OnBoardingPage(pages.first())
+        OnBoardingPage(pagesList.first())
     }
 
 }
@@ -73,7 +72,7 @@ private fun OnBoardingPagePreviewNight() {
 @Composable
 private fun OnBoardingPagePreviewDay() {
     NewsNowTheme() {
-        OnBoardingPage(pages.first())
+        OnBoardingPage(pagesList.first())
     }
 
 }

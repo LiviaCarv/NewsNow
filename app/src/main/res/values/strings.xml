@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">NewsNow</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_back">Back</string>
+    <string name="onboarding_page_1_title">Finance &amp; Crypto News</string>
+    <string name="onboarding_page_1_description">Stay up to date with the latest news on finance, investments, and cryptocurrencies.</string>
+    <string name="onboarding_page_2_title">Global News &amp; Culture</string>
+    <string name="onboarding_page_2_description">Explore international news, culture, and major events happening around the world.</string>
+    <string name="onboarding_page_3_title">Health &amp; Lifestyle</string>
+    <string name="onboarding_page_3_description">Read news about healthy living, nutrition, and habits that improve your well-being.</string>
 </resources>
