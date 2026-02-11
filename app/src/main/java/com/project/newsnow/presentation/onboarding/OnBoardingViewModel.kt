@@ -24,6 +24,9 @@ class OnBoardingViewModel @Inject constructor(
             OnBoardingEvent.NextClicked -> nextPage()
             OnBoardingEvent.BackClicked -> previousPage()
             OnBoardingEvent.SaveAppEntry -> saveAppEntry()
+            is OnBoardingEvent.PageChanged -> {
+                _state.update { it.copy(currentPage = event.page) }
+            }
         }
     }
 

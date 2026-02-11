@@ -14,6 +14,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,6 +27,7 @@ import com.project.newsnow.presentation.onboarding.components.OnBoardingPage
 import com.project.newsnow.presentation.onboarding.components.OnBoardingState
 import com.project.newsnow.presentation.onboarding.components.PageIndicator
 import com.project.newsnow.ui.theme.NewsNowTheme
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun OnBoardingScreen(
@@ -33,12 +35,21 @@ fun OnBoardingScreen(
     onEvent: (OnBoardingEvent) -> Unit
 ) {
     val pagerState = rememberPagerState(
-        initialPage = state.currentPage,
         pageCount = { state.pages.size }
     )
 
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPage }
+            .distinctUntilChanged()
+            .collect { page ->
+                onEvent(OnBoardingEvent.PageChanged(page))
+            }
+    }
+
     LaunchedEffect(state.currentPage) {
-        pagerState.animateScrollToPage(state.currentPage)
+        if (!pagerState.isScrollInProgress) {
+            pagerState.animateScrollToPage(state.currentPage)
+        }
     }
 
     Column(
