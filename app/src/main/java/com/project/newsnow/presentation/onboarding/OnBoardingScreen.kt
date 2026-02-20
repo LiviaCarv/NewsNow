@@ -24,7 +24,6 @@ import com.project.newsnow.presentation.Dimens.MediumPadding2
 import com.project.newsnow.presentation.Dimens.PageIndicatorWidth
 import com.project.newsnow.presentation.common.NewsButton
 import com.project.newsnow.presentation.onboarding.components.OnBoardingPage
-import com.project.newsnow.presentation.onboarding.components.OnBoardingState
 import com.project.newsnow.presentation.onboarding.components.PageIndicator
 import com.project.newsnow.ui.theme.NewsNowTheme
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -88,12 +87,9 @@ fun OnBoardingScreen(
                 NewsButton(stringResource(id = state.nextButtonTextRes)) {
                     onEvent(OnBoardingEvent.NextClicked)
                 }
-
-
             }
         }
     }
-
 }
 
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)

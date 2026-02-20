@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.project.newsnow.presentation.Dimens.MediumPadding1
 import com.project.newsnow.presentation.Dimens.MediumPadding2
 import com.project.newsnow.presentation.onboarding.Page
+import com.project.newsnow.presentation.onboarding.pagesList
 import com.project.newsnow.ui.theme.NewsNowTheme
 
 @Composable

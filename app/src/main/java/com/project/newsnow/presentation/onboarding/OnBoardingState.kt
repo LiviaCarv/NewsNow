@@ -1,8 +1,7 @@
-package com.project.newsnow.presentation.onboarding.components
+package com.project.newsnow.presentation.onboarding
 
 import androidx.annotation.StringRes
 import com.project.newsnow.R
-import com.project.newsnow.presentation.onboarding.Page
 
 data class OnBoardingState(
     val pages: List<Page> = pagesList,
