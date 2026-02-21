@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,6 +8,13 @@ plugins {
     alias(libs.plugins.ksp)
     kotlin("plugin.serialization") version libs.versions.kotlin
 }
+
+val localProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
+val newsApiKey: String = localProperties.getProperty("NEWS_API_KEY")
+    ?: error("NEWS_API_KEY not found in local.properties")
 
 android {
     namespace = "com.project.newsnow"
@@ -18,6 +28,12 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField(
+            "String",
+            "NEWS_API_KEY",
+            "\"$newsApiKey\""
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

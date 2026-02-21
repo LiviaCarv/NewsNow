@@ -1,4 +1,4 @@
-package com.project.newsnow.data.remote
+package com.project.newsnow.data.remote.dto
 
 import com.project.newsnow.domain.model.Article
 
