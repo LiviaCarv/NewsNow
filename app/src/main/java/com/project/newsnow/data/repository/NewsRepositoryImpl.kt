@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.project.newsnow.data.remote.NewsPagingSource
+import com.project.newsnow.data.remote.SearchNewsPagingSource
 import com.project.newsnow.data.remote.api.NewsAPI
 import com.project.newsnow.domain.model.Article
 import com.project.newsnow.domain.repository.NewsRepository
@@ -21,6 +22,26 @@ class NewsRepositoryImpl(
             ),
             pagingSourceFactory = {
                 NewsPagingSource(
+                    newsApi = newsApi,
+                    sources = sources.joinToString(",")
+                )
+            }
+        ).flow
+    }
+
+    override fun searchNews(
+        query: String,
+        sources: List<String>
+    ): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                prefetchDistance = 2,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                SearchNewsPagingSource(
+                    searchQuery = query,
                     newsApi = newsApi,
                     sources = sources.joinToString(",")
                 )
