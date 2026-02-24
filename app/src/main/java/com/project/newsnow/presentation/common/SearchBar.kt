@@ -4,6 +4,8 @@ import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -38,6 +40,8 @@ fun SearchBar(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 56.dp)
+            .statusBarsPadding()
+            .padding(horizontal = 16.dp)
             .then(
                 if (onClick != null) {
                     Modifier.clickable { onClick() }
