@@ -192,7 +192,8 @@ fun ArticleCardShimmer(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ArticleCardPreview() {
     NewsNowTheme {
@@ -208,32 +209,5 @@ private fun ArticleCardPreview() {
                 ""
             )
         )
-    }
-}
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun ArticleCardNightPreview() {
-    NewsNowTheme {
-        ArticleCard(
-            article = Article(
-                "Test Author",
-                "Test Content",
-                "This is a very large description. This is a very large description. This is a very large description. ",
-                "02-02-26 16:30",
-                Source("Test Source", "BBC NEWS"),
-                "This is a very large title. This is a very large title. This is a very large title.",
-                "",
-                ""
-            )
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun ArticleCardShimmerPreview() {
-    NewsNowTheme {
-        ArticleCardShimmer()
     }
 }

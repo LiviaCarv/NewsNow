@@ -9,4 +9,5 @@
     <string name="onboarding_page_2_description">Explore international news, culture, and major events happening around the world.</string>
     <string name="onboarding_page_3_title">Health &amp; Lifestyle</string>
     <string name="onboarding_page_3_description">Read news about healthy living, nutrition, and habits that improve your well-being.</string>
+    <string name="search_news">Search news…</string>
 </resources>
