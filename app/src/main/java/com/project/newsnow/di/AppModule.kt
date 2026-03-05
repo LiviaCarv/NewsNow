@@ -1,6 +1,9 @@
 package com.project.newsnow.di
 
 import android.app.Application
+import androidx.room.Room
+import com.project.newsnow.data.local.ArticleTypeConverter
+import com.project.newsnow.data.local.NewsDatabase
 import com.project.newsnow.data.manager.LocalUserManagerImpl
 import com.project.newsnow.data.remote.api.NewsAPI
 import com.project.newsnow.data.repository.NewsRepositoryImpl
@@ -13,6 +16,7 @@ import com.project.newsnow.domain.usecases.news.GetNews
 import com.project.newsnow.domain.usecases.news.NewsUseCases
 import com.project.newsnow.domain.usecases.news.SearchNews
 import com.project.newsnow.util.Constants.BASE_URL
+import com.project.newsnow.util.Constants.NEWS_DB_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +43,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsAPI() : NewsAPI {
+    fun provideNewsAPI(): NewsAPI {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -58,5 +62,26 @@ object AppModule {
         getNews = GetNews(newsRepository = newsRepository),
         searchNews = SearchNews(newsRepository = newsRepository)
     )
+
+    @Provides
+    @Singleton
+    fun provideNewsDatabase(
+        application: Application
+    ): NewsDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = NewsDatabase::class.java,
+            name = NEWS_DB_NAME
+        ).addTypeConverter(ArticleTypeConverter())
+            .fallbackToDestructiveMigrationFrom()
+            .build()
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(
+        newsDatabase: NewsDatabase
+    ) = newsDatabase.articleDao()
 
 }
