@@ -34,11 +34,12 @@ import com.project.newsnow.ui.theme.NewsNowTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsScreen(
-    article: Article,
+    state: DetailsState,
     onEvent: (DetailsEvent) -> Unit = {},
     navigateUp: () -> Unit = {}
 ) {
     val context = LocalContext.current
+    val article = state.article ?: return
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -46,7 +47,7 @@ fun DetailsScreen(
             DetailsTopBar(
                 onBackClick = navigateUp,
                 onBookmarkClick = {
-                    onEvent(DetailsEvent.SaveArticle)
+                    onEvent(DetailsEvent.UpsertDeleteArticle(article))
                 },
                 onShareClick = {
                     Intent(Intent.ACTION_SEND).also {
@@ -125,15 +126,17 @@ fun DetailsScreen(
 private fun DetailsScreenPreview() {
     NewsNowTheme {
         DetailsScreen(
-            article = Article(
-                "Russell Brandon",
-                "Chip giant and world’s most valuable company Nvidia reported record profits in its most recent quarter on Wednesday, as demand for AI compute continues to skyrocket.\r\n“The demand for tokens in the wo… [+2287 chars]",
-                "The demand for tokens in the world has gone completely exponential,\" Nvidia CEO Jensen Huang said about the company's earnings.",
-                "02-02-26 16:30",
-                Source("Test Source", "BBC NEWS"),
-                "Nvidia has another record quarter amid record capex spends | TechCrunch",
-                "https://techcrunch.com/2026/02/25/nvidia-earnings-record-capex-spend-ai/",
-                " \"https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2219673294.jpg?resize=1200,750"
+            state = DetailsState(
+                article = Article(
+                    "Russell Brandon",
+                    "Chip giant and world’s most valuable company Nvidia reported record profits in its most recent quarter on Wednesday, as demand for AI compute continues to skyrocket.\r\n“The demand for tokens in the wo… [+2287 chars]",
+                    "The demand for tokens in the world has gone completely exponential,\" Nvidia CEO Jensen Huang said about the company's earnings.",
+                    "02-02-26 16:30",
+                    Source("Test Source", "BBC NEWS"),
+                    "Nvidia has another record quarter amid record capex spends | TechCrunch",
+                    "https://techcrunch.com/2026/02/25/nvidia-earnings-record-capex-spend-ai/",
+                    " \"https://techcrunch.com/wp-content/uploads/2025/07/GettyImages-2219673294.jpg?resize=1200,750"
+                )
             )
         )
     }
