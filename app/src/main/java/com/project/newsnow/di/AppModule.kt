@@ -17,6 +17,7 @@ import com.project.newsnow.domain.usecases.news.DeleteArticle
 import com.project.newsnow.domain.usecases.news.GetNews
 import com.project.newsnow.domain.usecases.news.NewsUseCases
 import com.project.newsnow.domain.usecases.news.SearchNews
+import com.project.newsnow.domain.usecases.news.SelectArticle
 import com.project.newsnow.domain.usecases.news.SelectArticles
 import com.project.newsnow.domain.usecases.news.UpsertArticle
 import com.project.newsnow.util.Constants.BASE_URL
@@ -65,12 +66,13 @@ object AppModule {
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
         newsDao: ArticleDao
-        ) = NewsUseCases(
+    ) = NewsUseCases(
         getNews = GetNews(newsRepository = newsRepository),
         searchNews = SearchNews(newsRepository = newsRepository),
         upsertArticle = UpsertArticle(newsDao = newsDao),
         deleteArticle = DeleteArticle(newsDao = newsDao),
-        selectArticles = SelectArticles(newsDao = newsDao)
+        selectArticles = SelectArticles(newsDao = newsDao),
+        selectArticle = SelectArticle(newsDao = newsDao)
     )
 
     @Provides
