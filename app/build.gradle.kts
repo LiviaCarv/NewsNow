@@ -3,29 +3,31 @@ import java.io.FileInputStream
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.parcelize)
     kotlin("plugin.serialization") version libs.versions.kotlin
 }
 
 val localProperties = Properties().apply {
-    load(FileInputStream(rootProject.file("local.properties")))
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(FileInputStream(file))
+    }
 }
 
-val newsApiKey: String = localProperties.getProperty("NEWS_API_KEY")
-    ?: error("NEWS_API_KEY not found in local.properties")
+val newsApiKey: String = localProperties.getProperty("NEWS_API_KEY") ?: ""
 
 android {
     namespace = "com.project.newsnow"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.project.newsnow"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -50,6 +52,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -105,7 +110,7 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
 
     implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
+    // implementation(libs.coil.network.okhttp)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
