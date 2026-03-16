@@ -16,20 +16,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.compose.LazyPagingItems
 import com.project.newsnow.R
 import com.project.newsnow.domain.model.Article
 import com.project.newsnow.presentation.Dimens.MediumPadding1
+import com.project.newsnow.presentation.Dimens.SmallPadding
 import com.project.newsnow.presentation.common.ArticlesList
 import com.project.newsnow.presentation.common.SearchBar
-import com.project.newsnow.presentation.navigation.Route
 
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit,
-    modifier: Modifier = Modifier
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit,
 ) {
     val titles by remember {
         derivedStateOf {
@@ -44,41 +46,45 @@ fun HomeScreen(
     }
 
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(top = MediumPadding1)
             .statusBarsPadding()
     ) {
-        Text(style = MaterialTheme.typography.titleMedium, text = stringResource(R.string.app_name))
+        Text(
+            modifier = Modifier.padding(horizontal = MediumPadding1, vertical = SmallPadding),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold,
+            text = stringResource(R.string.app_name)
+        )
 
         SearchBar(
             modifier = Modifier
-                .padding(horizontal = MediumPadding1)
                 .fillMaxWidth(),
             value = "",
             readOnly = true,
             onValueChange = {},
             onSearch = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             }
         )
 
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = titles, modifier = Modifier
+            text = titles,
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = MediumPadding1)
-                .basicMarquee(), fontSize = 12.sp,
+                .padding(horizontal = MediumPadding1)
+                .basicMarquee(),
+            fontSize = 12.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
         ArticlesList(
-            modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles,
             onClick = {
-                //TODO: Navigate to Details Screen
+                navigateToDetails(it)
             }
         )
     }

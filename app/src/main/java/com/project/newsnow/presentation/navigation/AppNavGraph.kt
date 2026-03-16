@@ -8,11 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.project.newsnow.presentation.news_navigator.NewsNavigator
 import com.project.newsnow.presentation.onboarding.OnBoardingScreen
 import com.project.newsnow.presentation.onboarding.OnBoardingViewModel
-import com.project.newsnow.presentation.search.SearchScreen
-import com.project.newsnow.presentation.search.SearchViewModel
-import androidx.compose.runtime.collectAsState
 
 @Composable
 fun AppNavGraph(
@@ -41,8 +39,7 @@ fun AppNavGraph(
             startDestination = Route.NewsNavigatorScreen.route
         ) {
             composable(route = Route.NewsNavigatorScreen.route) {
-                val viewModel: SearchViewModel = hiltViewModel()
-                SearchScreen(state = viewModel.state.collectAsState().value, onEvent = viewModel::onEvent, navigate = {})
+                NewsNavigator()
             }
         }
     }

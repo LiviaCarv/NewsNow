@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.project.newsnow.domain.model.Article
 import com.project.newsnow.presentation.common.ArticlesList
 import com.project.newsnow.presentation.navigation.Route
 import com.project.newsnow.ui.theme.NewsNowTheme
@@ -20,7 +21,7 @@ import com.project.newsnow.ui.theme.NewsNowTheme
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit,
+    navigateToDetails: (Article) -> Unit,
 ) {
 
     Scaffold(
@@ -44,7 +45,7 @@ fun BookmarkScreen(
     ) { paddingValues ->
         ArticlesList(
             articles = state.articles,
-            onClick = { navigate(Route.DetailsScreen.route) },
+            onClick = { navigateToDetails(it) },
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
@@ -58,7 +59,7 @@ private fun BookmarkScreenPreview() {
     NewsNowTheme() {
         BookmarkScreen(
             state = BookmarkState(),
-            navigate = {}
+            navigateToDetails = {}
         )
     }
 

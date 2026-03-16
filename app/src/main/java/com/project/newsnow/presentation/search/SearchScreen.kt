@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.project.newsnow.domain.model.Article
 import com.project.newsnow.presentation.common.ArticlesList
 import com.project.newsnow.presentation.common.SearchBar
 
@@ -15,7 +16,7 @@ import com.project.newsnow.presentation.common.SearchBar
 fun SearchScreen(
     state: SearchState,
     onEvent: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -44,7 +45,7 @@ fun SearchScreen(
                 ArticlesList(
                     articles = articles,
                     onClick = { article ->
-                        navigate(/* details route */ "")
+                        navigateToDetails(article)
                     }
                 )
             }
