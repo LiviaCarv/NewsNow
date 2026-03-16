@@ -114,7 +114,7 @@ fun ArticleCard(
                         Spacer(modifier = Modifier.width(4.dp))
 
                         Text(
-                            text = article.publishedAt,
+                            text = article.publishedAt.substringBefore("T"),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

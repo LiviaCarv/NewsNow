@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.project.newsnow.domain.model.Article
 import com.project.newsnow.domain.model.Source
 import com.project.newsnow.presentation.details.components.DetailsTopBar
