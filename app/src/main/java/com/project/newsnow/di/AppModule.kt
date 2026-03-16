@@ -58,21 +58,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsAPI: NewsAPI): NewsRepository =
-        NewsRepositoryImpl(newsApi = newsAPI)
+    fun provideNewsRepository(newsAPI: NewsAPI, newsDao: ArticleDao): NewsRepository =
+        NewsRepositoryImpl(newsApi = newsAPI, newsDao = newsDao)
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
-        newsDao: ArticleDao
     ) = NewsUseCases(
         getNews = GetNews(newsRepository = newsRepository),
         searchNews = SearchNews(newsRepository = newsRepository),
-        upsertArticle = UpsertArticle(newsDao = newsDao),
-        deleteArticle = DeleteArticle(newsDao = newsDao),
-        selectArticles = SelectArticles(newsDao = newsDao),
-        selectArticle = SelectArticle(newsDao = newsDao)
+        upsertArticle = UpsertArticle(newsRepository = newsRepository),
+        deleteArticle = DeleteArticle(newsRepository = newsRepository),
+        selectArticles = SelectArticles(newsRepository = newsRepository),
+        selectArticle = SelectArticle(newsRepository = newsRepository)
     )
 
     @Provides
